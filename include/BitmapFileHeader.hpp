@@ -1,7 +1,9 @@
 #pragma once
+#include <stdint.h>
 
 // Align on 2 byte boundaries, rather than using extra padding (which may be more efficient)
-#pragma pack(2)
+#pragma pack(push, 2)
+
 namespace asabo {
 struct BitmapFileHeader
 {
@@ -10,4 +12,5 @@ struct BitmapFileHeader
     int32_t reserved{0};
     int32_t dataOffset;
 };
+#pragma pack(pop)
 } // namespace asabo

@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 // Align on 2 byte boundaries, rather than using extra padding (which may be more efficient)
-#pragma pack(2)
+#pragma pack(push, 2)
 namespace asabo {
 struct BitmapInfoHeader
 {
@@ -18,4 +18,5 @@ struct BitmapInfoHeader
     int32_t colors{0};
     int32_t importantColors{0};
 };
+#pragma pack(pop)
 } // namespace asabo
