@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-// Align on 2 byte boundaries, rather than using extra padding (which may be more efficient)
+// Align on 2 byte boundaries, rather than using extra padding (which may be more efficient), but not match the bitmap standard
 #pragma pack(push, 2)
 namespace asabo {
 struct BitmapInfoHeader

@@ -1,9 +1,10 @@
+#include <fstream>
+#include <iostream>
+
 #include "Bitmap.hpp"
 #include "BitmapFileHeader.hpp"
 #include "BitmapInfoHeader.hpp"
-#include <fstream>
-#include <iostream>
-using namespace asabo;
+
 
 namespace asabo {
 
@@ -32,12 +33,9 @@ bool BitMap::write(std::string fileName)
         return false;
     }
 
-    // fs.write(reinterpret_cast<char*>(&fileHeader), sizeof(fileHeader));
-    // fs.write(reinterpret_cast<char*>(&infoHeader), sizeof(infoHeader));
-    // fs.write(reinterpret_cast<char*>(m_pPixels.get()), dataSize);
-    fs.write((char*)(&fileHeader), sizeof(fileHeader));
-    fs.write((char*)(&infoHeader), sizeof(infoHeader));
-    fs.write((char*)(m_pPixels.get()), dataSize);
+    fs.write(reinterpret_cast<char*>(&fileHeader), sizeof(fileHeader));
+    fs.write(reinterpret_cast<char*>(&infoHeader), sizeof(infoHeader));
+    fs.write(reinterpret_cast<char*>(m_pPixels.get()), dataSize);
 
     fs.close();
     return true;
