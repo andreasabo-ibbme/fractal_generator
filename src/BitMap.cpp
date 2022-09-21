@@ -39,7 +39,7 @@ bool BitMap::write(std::string fileName)
     fs.close();
     return true;
 }
-void BitMap::setPixel(int x, int y, uint8_t red, uint8_t blue, uint8_t green)
+void BitMap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue)
 {
     auto* pPixel = m_pPixels.get();
 

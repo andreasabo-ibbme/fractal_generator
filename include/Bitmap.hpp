@@ -15,6 +15,6 @@ private:
 public:
     BitMap(int width, int height);
     bool write(std::string fileName);
-    void setPixel(int x, int y, uint8_t red, uint8_t blue, uint8_t green);
+    void setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue);
 };
 } // namespace asabo
