@@ -5,7 +5,6 @@
 #include "BitmapFileHeader.hpp"
 #include "BitmapInfoHeader.hpp"
 
-
 namespace asabo {
 
 BitMap::BitMap(int width, int height)
@@ -40,6 +39,15 @@ bool BitMap::write(std::string fileName)
     fs.close();
     return true;
 }
-void BitMap::setPixel(int x, int y, uint8_t red, uint8_t blue, uint8_t green) {}
+void BitMap::setPixel(int x, int y, uint8_t red, uint8_t blue, uint8_t green)
+{
+    auto* pPixel = m_pPixels.get();
+
+    pPixel += (y * m_width + x) * 3; // Offset to pixel of interest
+    // Little endian format
+    pPixel[0] = blue;
+    pPixel[1] = green;
+    pPixel[2] = red;
+}
 
 } // namespace asabo
