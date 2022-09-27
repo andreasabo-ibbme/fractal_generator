@@ -18,7 +18,6 @@ public:
     void addZoom(int x, int y, double scale);
     void colourBitmap();
     std::vector<int> buildHistogram();
-
 };
 
 } // namespace asabo

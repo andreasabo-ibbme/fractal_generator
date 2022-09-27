@@ -4,7 +4,6 @@
 #include "Zoom.hpp"
 namespace asabo {
 
-
 class ZoomList
 {
     int m_width;

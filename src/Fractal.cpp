@@ -3,15 +3,14 @@
 #include <cmath>
 #include <iostream>
 
-
 using namespace asabo;
 
 Fractal::Fractal(int width, int height)
     : m_width(width)
     , m_height(height)
 {
-    m_zooms = std::make_unique<ZoomList>(ZoomList(m_width, m_height));
     m_bitMap = std::make_unique<BitMap>(m_width, m_height);
+    m_zooms = std::make_unique<ZoomList>(ZoomList(m_width, m_height));
     m_iterations.resize(width * height);
 }
 
@@ -29,7 +28,7 @@ void Fractal::colourBitmap()
 {
     auto cumulativeIterHistogram = buildHistogram();
     auto total = static_cast<double>(m_width * m_height);
-    
+
     for (int y{0}; y < m_height; ++y) {
         for (int x{0}; x < m_width; ++x) {
             auto iterations = m_iterations[y * m_width + x];

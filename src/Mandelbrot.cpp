@@ -1,7 +1,6 @@
 #include "Mandelbrot.hpp"
 #include <complex>
 
-
 using namespace asabo;
 
 int Mandelbrot::getIterations(double x, double y)
@@ -13,7 +12,8 @@ int Mandelbrot::getIterations(double x, double y)
 
     while (iterations < maxIterations) {
         z = z * z + c;
-        if (abs(z) > 2) break;
+        if (abs(z) > 2)
+            break;
         iterations++;
     }
 
