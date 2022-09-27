@@ -11,6 +11,7 @@ include_directories(include)
 add_executable(fractal
     src/main.cpp
     src/BitMap.cpp
+    src/Fractal.cpp
     src/Mandelbrot.cpp
     src/ZoomList.cpp)
 
