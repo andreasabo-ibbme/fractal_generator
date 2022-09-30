@@ -5,9 +5,7 @@
 
 using namespace asabo;
 
-Fractal::Fractal(int width, int height)
-    : m_width(width)
-    , m_height(height)
+Fractal::Fractal(int width, int height) : m_width(width), m_height(height)
 {
     m_bitMap = std::make_unique<BitMap>(m_width, m_height);
     m_zooms = std::make_unique<ZoomList>(ZoomList(m_width, m_height));

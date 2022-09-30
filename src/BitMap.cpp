@@ -7,10 +7,7 @@
 
 namespace asabo {
 
-BitMap::BitMap(int width, int height)
-    : m_height(height)
-    , m_width(width)
-    , m_pPixels(new uint8_t[width * height * 3]())
+BitMap::BitMap(int width, int height) : m_height(height), m_width(width), m_pPixels(new uint8_t[width * height * 3]())
 {}
 
 bool BitMap::write(std::string fileName)
