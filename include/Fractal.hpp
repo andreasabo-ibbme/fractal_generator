@@ -12,8 +12,12 @@ class Fractal
     std::unique_ptr<BitMap> m_bitMap;
     std::vector<int> m_iterations;
 
+
+
 public:
     Fractal(int width, int height);
+    void run(std::string fileName);
+private:
     bool writeFractal(std::string fileName);
     void addZoom(int x, int y, double scale);
     void colourBitmap();

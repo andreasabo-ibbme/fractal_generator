@@ -12,6 +12,13 @@ Fractal::Fractal(int width, int height) : m_width(width), m_height(height)
     m_iterations.resize(width * height);
 }
 
+void Fractal::run(std::string fileName)
+{
+    addZoom(m_width / 2, m_height / 2, 4.0 / m_width);
+    colourBitmap();
+    writeFractal(fileName);
+}
+
 bool Fractal::writeFractal(std::string fileName)
 {
     return m_bitMap->write(fileName);
