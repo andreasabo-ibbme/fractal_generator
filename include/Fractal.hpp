@@ -1,9 +1,9 @@
 #pragma once
 #include "Bitmap.hpp"
 #include "ZoomList.hpp"
-
+#include "RGB.hpp"
+#include <vector>
 namespace asabo {
-
 class Fractal
 {
     int m_width;
@@ -12,14 +12,13 @@ class Fractal
     std::unique_ptr<BitMap> m_bitMap;
     std::vector<int> m_iterations;
 
-
-
 public:
     Fractal(int width, int height);
     void run(std::string fileName);
+    void addZoom(int x, int y, double scale);
+
 private:
     bool writeFractal(std::string fileName);
-    void addZoom(int x, int y, double scale);
     void colourBitmap();
     std::vector<int> buildHistogram();
 };

@@ -13,6 +13,7 @@ add_executable(fractal
     src/BitMap.cpp
     src/Fractal.cpp
     src/Mandelbrot.cpp
+    src/RGB.cpp
     src/ZoomList.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

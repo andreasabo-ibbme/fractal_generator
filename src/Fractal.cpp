@@ -1,5 +1,6 @@
 #include "Fractal.hpp"
 #include "Mandelbrot.hpp"
+
 #include <cmath>
 #include <iostream>
 
@@ -10,11 +11,11 @@ Fractal::Fractal(int width, int height) : m_width(width), m_height(height)
     m_bitMap = std::make_unique<BitMap>(m_width, m_height);
     m_zooms = std::make_unique<ZoomList>(ZoomList(m_width, m_height));
     m_iterations.resize(width * height);
+    addZoom(m_width / 2, m_height / 2, 4.0 / m_width);
 }
 
 void Fractal::run(std::string fileName)
 {
-    addZoom(m_width / 2, m_height / 2, 4.0 / m_width);
     colourBitmap();
     writeFractal(fileName);
 }
@@ -38,7 +39,6 @@ void Fractal::colourBitmap()
         for (int x{0}; x < m_width; ++x) {
             auto iterations = m_iterations[y * m_width + x];
             auto hue = cumulativeIterHistogram[iterations] / total;
-            // std::cout << hue << ' ';
             // This does the same as the histogram but O(w*h*maxiterations) overall, histogram is O(maxIteration + w*h)
             // hue = std::accumulate(histogram.cbegin(), histogram.cbegin() + iterations, 0.0) / total;
 
@@ -51,7 +51,6 @@ void Fractal::colourBitmap()
 }
 
 /* PRIVATE */
-
 std::vector<int> Fractal::buildHistogram()
 {
     auto histogram = std::array<int, Mandelbrot::maxIterations>();
