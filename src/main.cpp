@@ -12,6 +12,10 @@ int main()
     Fractal fractal{width, height};
     fractal.addZoom(295 * multFactor, 202 * multFactor, 0.1);
     fractal.addZoom(310 * multFactor, 357 * multFactor, 0.1);
+    fractal.addRange(0.0, RGB(0, 0, 0));
+    fractal.addRange(0.3, RGB(255, 0, 0));
+    fractal.addRange(0.5, RGB(255, 255, 0));
+    fractal.addRange(1.0, RGB(255, 255, 255));
     fractal.run("mandbrot_out4.bmp");
     std::cout << "Finished!\n";
 }

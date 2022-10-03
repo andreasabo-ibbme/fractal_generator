@@ -1,6 +1,7 @@
 #include "Fractal.hpp"
 #include "Mandelbrot.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 
@@ -30,6 +31,12 @@ void Fractal::addZoom(int x, int y, double scale)
     m_zooms->add(Zoom(x, y, scale));
 }
 
+void Fractal::addRange(double rangeEnd, const RGB& rgb)
+{
+    m_ranges.emplace_back(rangeEnd * Mandelbrot::maxIterations, rgb);
+    std::sort(m_ranges.begin(), m_ranges.end());
+}
+
 void Fractal::colourBitmap()
 {
     auto cumulativeIterHistogram = buildHistogram();
@@ -38,7 +45,7 @@ void Fractal::colourBitmap()
     for (int y{0}; y < m_height; ++y) {
         for (int x{0}; x < m_width; ++x) {
             auto iterations = m_iterations[y * m_width + x];
-            auto hue = cumulativeIterHistogram[iterations] / total;
+            // auto hue = cumulativeIterHistogram[iterations] / total;
             // This does the same as the histogram but O(w*h*maxiterations) overall, histogram is O(maxIteration + w*h)
             // hue = std::accumulate(histogram.cbegin(), histogram.cbegin() + iterations, 0.0) / total;
 
