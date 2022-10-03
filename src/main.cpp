@@ -16,6 +16,7 @@ int main()
     fractal.addRange(0.3, RGB(255, 0, 0));
     fractal.addRange(0.5, RGB(255, 255, 0));
     fractal.addRange(1.0, RGB(255, 255, 255));
-    fractal.run("mandbrot_out4.bmp");
+
+    fractal.run("mandbrot_out5.bmp");
     std::cout << "Finished!\n";
 }

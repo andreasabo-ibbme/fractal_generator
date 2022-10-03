@@ -1,9 +1,11 @@
 #pragma once
 #include "Bitmap.hpp"
-#include "Range.hpp"
+#include "Mandelbrot.hpp"
 #include "RGB.hpp"
+#include "Range.hpp"
 #include "ZoomList.hpp"
 #include <vector>
+
 namespace asabo {
 class Fractal
 {
@@ -13,6 +15,7 @@ class Fractal
     std::unique_ptr<BitMap> m_bitMap;
     std::vector<int> m_iterations;
     std::vector<Range> m_ranges;
+    std::array<int, Mandelbrot::maxIterations> m_histogram;
 
 public:
     Fractal(int width, int height);
@@ -24,6 +27,7 @@ private:
     bool writeFractal(std::string fileName);
     void colourBitmap();
     std::vector<int> buildHistogram();
+    std::vector<int> calculatePixelsInRange();
 };
 
 } // namespace asabo
