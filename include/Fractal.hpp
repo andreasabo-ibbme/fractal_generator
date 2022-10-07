@@ -4,6 +4,7 @@
 #include "RGB.hpp"
 #include "Range.hpp"
 #include "ZoomList.hpp"
+#include <array>
 #include <vector>
 
 namespace asabo {
@@ -15,6 +16,7 @@ class Fractal
     std::unique_ptr<BitMap> m_bitMap;
     std::vector<int> m_iterations;
     std::vector<Range> m_ranges;
+    std::vector<int> m_rangeTotals;
     std::array<int, Mandelbrot::maxIterations> m_histogram;
 
 public:
@@ -27,7 +29,8 @@ private:
     bool writeFractal(std::string fileName);
     void colourBitmap();
     std::vector<int> buildHistogram();
-    std::vector<int> calculatePixelsInRange();
+    void calculatePixelsInRange();
+    int getRange(int iterations) const;
 };
 
 } // namespace asabo
