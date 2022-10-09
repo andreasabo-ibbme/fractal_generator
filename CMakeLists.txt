@@ -6,8 +6,8 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_compile_options(-Wall -Wextra -Wpedantic)
-
-
+include(CTest)
+include(CPack)
 
 include_directories(include)
 add_executable(fractal
@@ -19,12 +19,10 @@ add_executable(fractal
     src/ZoomList.cpp)
 
 # Testing
-include(CTest)
 option(BUILD_TESTING "Build the tests" ON)
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+    add_subdirectory(extern/Catch2)
+    list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
     add_subdirectory(tests)
 endif()
 
-
-
-include(CPack)
