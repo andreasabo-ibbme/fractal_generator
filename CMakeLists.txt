@@ -10,7 +10,8 @@ include(CTest)
 include(CPack)
 
 include_directories(include)
-add_executable(fractal
+add_library(fractal
+STATIC
     src/main.cpp
     src/BitMap.cpp
     src/Fractal.cpp
@@ -24,5 +25,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     add_subdirectory(extern/Catch2)
     list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
     add_subdirectory(tests)
+    target_link_libraries(tests PRIVATE fractal)
 endif()
 
