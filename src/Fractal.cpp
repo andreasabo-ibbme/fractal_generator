@@ -46,14 +46,12 @@ std::vector<Range> Fractal::getRanges() const
 void Fractal::colourBitmap()
 {
     auto cumulativeIterHistogram = buildHistogram();
-    auto total = static_cast<double>(m_width * m_height);
     for (int y{0}; y < m_height; ++y) {
         for (int x{0}; x < m_width; ++x) {
             auto iterations = m_iterations[y * m_width + x];
             auto rangeInd = getRange(iterations);
 
             auto rangeStartIter = m_ranges[rangeInd].rangeEnd;
-            auto rangeEndIter = m_ranges[rangeInd + 1].rangeEnd;
 
             auto startColour = m_ranges[rangeInd].colour;
             auto endColour = m_ranges[rangeInd + 1].colour;
@@ -116,7 +114,7 @@ void Fractal::calculatePixelsInRange()
 int Fractal::getRange(int iterations) const
 {
     int rangeInd = 0;
-    while (rangeInd < m_ranges.size() - 1) {
+    while (rangeInd < static_cast<int>(m_ranges.size()) - 1) {
         if (m_ranges[rangeInd + 1].rangeEnd > iterations) {
             break;
         }
