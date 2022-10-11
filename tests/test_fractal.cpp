@@ -23,23 +23,28 @@ TEST_CASE("Fractals interface")
         refRanges.push_back({refRangesStart[i], refRangesRGB[i]});
     }
 
-    SECTION("Add Ranges in increasing order")
+    SECTION("No ranges")
     {
-        std::vector<size_t> insertOrder{0, 1, 2, 3};
-        for (auto i : insertOrder) {
-            fractal.addRange(refRanges[i].first, refRanges[i].second);
-        }
-
         auto res = fractal.getRanges();
-        REQUIRE(res.size() == refRangesRGB.size());
-        for (size_t i{0}; i < res.size(); ++i) {
-            CHECK(res[i].colour == refRangesRGB[i]);
-        }
+        REQUIRE(res.size() == 0);
     }
 
-    SECTION("Add Ranges in random order")
+    SECTION("One range")
     {
-        std::vector<size_t> insertOrder { 0, 3, 1, 2 };
+        fractal.addRange(refRanges[0].first, refRanges[0].second);
+        auto res = fractal.getRanges();
+
+        REQUIRE(res.size() == 1);
+        CHECK(res[0].colour == refRanges[0].second);
+    }
+    SECTION("Add Ranges in various orders")
+    {
+        std::vector<size_t> insertOrder;
+
+        SECTION("in order") { insertOrder = {0, 1, 2, 3}; }
+
+        SECTION("out of order") { insertOrder = {0, 3, 2, 1}; }
+
         for (auto i : insertOrder) {
             fractal.addRange(refRanges[i].first, refRanges[i].second);
         }
@@ -47,7 +52,7 @@ TEST_CASE("Fractals interface")
         auto res = fractal.getRanges();
         REQUIRE(res.size() == refRangesRGB.size());
         for (size_t i{0}; i < res.size(); ++i) {
-            CHECK(res[i].colour == refRangesRGB[i]);
+            CHECK(res[i].colour == refRanges[i].second);
         }
     }
 }
