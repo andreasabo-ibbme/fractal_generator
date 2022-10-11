@@ -27,14 +27,20 @@ bool Fractal::writeFractal(std::string fileName)
     return m_bitMap->write(fileName);
 }
 
+void Fractal::addRange(double rangeEnd, const RGB& rgb)
+{
+    m_ranges.emplace_back(rangeEnd * Mandelbrot::maxIterations, rgb);
+    std::sort(m_ranges.begin(), m_ranges.end());
+}
+
 void Fractal::addZoom(int x, int y, double scale)
 {
     m_zooms->add(Zoom(x, y, scale));
 }
 
-void Fractal::addRange(double rangeEnd, const RGB& rgb)
+std::vector<Range> Fractal::getRanges() const
 {
-    m_ranges.emplace_back(rangeEnd * Mandelbrot::maxIterations, rgb);
+    return m_ranges;
 }
 
 void Fractal::colourBitmap()
@@ -54,7 +60,6 @@ void Fractal::colourBitmap()
             auto colourDiff = endColour - startColour;
 
             auto rangeTotal = m_rangeTotals[rangeInd];
-            // m_ranges[rangeInd].colour
             // Total up all pixels up to this number of iterations starting from the beginning of the current range,
             // Divided by all of the pixels in this range
             auto uptoIterInRange = std::accumulate(m_histogram.cbegin() + rangeStartIter,
@@ -63,16 +68,9 @@ void Fractal::colourBitmap()
             // This does the same as the histogram but O(w*h*maxiterations) overall, histogram is O(maxIteration + w*h)
             // hue = std::accumulate(histogram.cbegin(), histogram.cbegin() + iterations, 0.0) / total;
             double inRangeFraction = uptoIterInRange / static_cast<double>(rangeTotal);
-            // std::cout << "inRangeFraction: " << inRangeFraction << '\n';
             uint8_t red = startColour.R + colourDiff.R * inRangeFraction;
             uint8_t green = startColour.G + colourDiff.G * inRangeFraction;
             uint8_t blue = startColour.B + colourDiff.B * inRangeFraction;
-            // std::cout << "red: " << red << "\tgreen: " << green << "\tblue: " << blue << '\n';
-            // uint8_t green = std::pow(m_ranges[rangeInd].colour.G, hue);
-            // uint8_t blue = std::pow(m_ranges[rangeInd].colour.B, hue);
-            // uint8_t red = 0;
-            // uint8_t green = 0;
-            // uint8_t blue = 0;
             m_bitMap->setPixel(x, y, red, green, blue);
         }
     }
@@ -113,16 +111,10 @@ void Fractal::calculatePixelsInRange()
         auto endIter = m_ranges[i + 1].rangeEnd;
         m_rangeTotals[i] = std::accumulate(m_histogram.begin() + startIter, m_histogram.begin() + endIter, 0);
     }
-
-    // return m_range_totals;
 }
 
 int Fractal::getRange(int iterations) const
 {
-    // std::cout << iterations << '\n';
-    // for (auto& item : m_ranges) {
-    //     std::cout << item.rangeEnd << '\n';
-    // }
     int rangeInd = 0;
     while (rangeInd < m_ranges.size() - 1) {
         if (m_ranges[rangeInd + 1].rangeEnd > iterations) {
@@ -130,7 +122,6 @@ int Fractal::getRange(int iterations) const
         }
         rangeInd++;
     }
-    // std::cout << rangeInd << '\n';
     // If the ranges aren't defined fully or correctly, the rangeInd may be invalid
     assert(rangeInd > -1);
     assert(rangeInd < static_cast<int>(m_ranges.size()));
