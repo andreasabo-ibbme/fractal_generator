@@ -9,7 +9,7 @@ class ZoomList
     int m_width;
     int m_height;
     double m_xCenter{0};
-    double m_yCenter{1};
+    double m_yCenter{0};
     double m_scale{1.0};
     std::vector<Zoom> m_zooms;
 
