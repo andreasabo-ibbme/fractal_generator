@@ -1,4 +1,5 @@
 #include "RGB.hpp"
+
 #include <algorithm>
 namespace asabo {
 
