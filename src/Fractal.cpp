@@ -102,7 +102,6 @@ std::vector<int> Fractal::buildHistogram()
 void Fractal::calculatePixelsInRange()
 {
     std::sort(m_ranges.begin(), m_ranges.end()); // Sort by rangeEnd cutoffs
-    // std::vector<int> m_range_totals(m_ranges.size() - 1, 0);
     m_rangeTotals.resize(m_ranges.size() - 1, 0);
     for (int i{0}; i < int(m_ranges.size()) - 1; ++i) {
         auto startIter = m_ranges[i].rangeEnd;
