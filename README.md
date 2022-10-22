@@ -7,7 +7,7 @@ The number of iterations is calculated by iterating $z_{n+1} = z_n^2+ c$ startin
 ![Mandelbrot](./mandelbrot.bmp)
 
 ## Cloning
-This library uses Catch2 as a submodule, so this repo should be cloned with:
+This repo includes Catch2 as a submodule, so this repo should be cloned with:
 
 ```
 git clone --recursive https://github.com/andreasabo-ibbme/fractal_generator.git
@@ -20,11 +20,11 @@ git submodule update --init
 ```
 
 ## Building and Installation
-These instructions have bee tested on Windows 10 Home build 19044.1586, GCC 10.3.0
+These instructions have been tested on Windows 10 Home build 19044.1586, GCC 10.3.0
 
 ```
 # Configure the library
-cmake -S . -B build -G Ninja      # You can select your preferred generator (using Ninja here)
+cmake -S . -B build -G Ninja      # You can select your preferred generator
 
 # Build and install
 cmake --build build 
