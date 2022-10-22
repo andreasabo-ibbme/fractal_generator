@@ -12,11 +12,24 @@ include(CPack)
 
 include_directories(include)
 add_subdirectory(src)
+
+# Installation
+if(NOT DEFINED INSTALL_DIR)
+    set(INSTALL_DIR "bin")
+endif()
+
+install(TARGETS fractal
+    DESTINATION "${INSTALL_DIR}"
+)
+
 # Testing
 option(BUILD_TESTING "Build the tests" ON)
+
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     add_subdirectory(extern/Catch2)
     list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
     add_subdirectory(tests)
+    install(TARGETS tests
+        DESTINATION "${INSTALL_DIR}"
+    )
 endif()
-
