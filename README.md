@@ -50,3 +50,9 @@ After building and installing, the tests can be run with:
 ```
 ./bin/tests.exe
 ```
+
+
+## Acknowledgment 
+This project is adapted and extended from the Fractal project from the Cave of Programming Advanced C++ course by John Purcell.  
+Course: https://www.caveofprogramming.com/p/learn-c-tutorial  
+Code: https://github.com/caveofprogramming/advanced-cplusplus
